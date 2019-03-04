@@ -1,0 +1,126 @@
+%第二问
+
+clc;clear all;close all;
+a = imread('lena.bmp')
+figure(1)
+subplot(2,4,1)
+imshow(a);
+title('gray leavl 8');
+[x,y] = size(a);
+pho = zeros(x,y);
+for n = 1:7
+    for i = 1:x
+        for j = 1:y
+            pho(i,j) = floor(a(i,j)/(2^n));
+        end
+    end
+    subplot(2,4,n+1);
+    imshow(pho,[0,2^(8-n) - 1]);
+    title(['gray leavl ' num2str(8-n)])
+end
+
+
+
+
+%第三问
+
+clc;clear all;close all;
+a = imread('lena.bmp');
+c = std2(a);
+mean = mean2(a);
+variance = c^2;
+
+
+
+
+
+%第四问
+
+clc;clear all;close all;
+a = imread('lena.bmp');
+a_nearest = imresize(a,[2048,2048],'nearest');
+figure(2);
+subplot(1,3,1);
+imshow(a_nearest);
+title('近邻');
+a_bilinear = imresize(a,[2048,2048],'bilinear');
+subplot(1,3,2);
+imshow(a_bilinear);
+title('双线性');
+a_bicubic = imresize(a,[2048,2048],'bicubic');
+subplot(1,3,3);
+imshow(a_bicubic);
+title('双三次插值')
+
+
+
+%第五问
+
+clc;clear all;close all;
+a = imread('lena.bmp');
+b = imread('elain1.bmp');
+T = [1 1.5 0;0 1 0; 0 0 1];
+T_m = maketform('affine',T);
+a_T = imtransform(a,T_m);
+b_T = imtransform(b,T_m);
+a_rotate = imrotate(a,30);
+b_rotate = imrotate(b,30);
+%lena图像的shear变换
+a_T_nearest = imresize(a_T,[2048,2048],'nearest');
+figure(3);
+subplot(1,3,1);
+imshow(a_T_nearest);
+title('近邻');
+a_T_bilinear = imresize(a_T,[2048,2048],'bilinear');
+subplot(1,3,2);
+imshow(a_T_bilinear);
+title('双线性');
+a_T_bicubic = imresize(a_T,[2048,2048],'bicubic');
+subplot(1,3,3);
+imshow(a_T_bicubic);
+title('双三次插值');
+
+%lena图像的旋转变换
+a_rotate_nearest = imresize(a_rotate,[2048,2048],'nearest');
+figure(4);
+subplot(1,3,1);
+imshow(a_rotate_nearest);
+title('近邻');
+a_rotate_bilinear = imresize(a_rotate,[2048,2048],'bilinear');
+subplot(1,3,2);
+imshow(a_rotate_bilinear);
+title('双线性');
+a_rotate_bicubic = imresize(a_rotate,[2048,2048],'bicubic');
+subplot(1,3,3);
+imshow(a_rotate_bicubic);
+title('双三次插值')
+
+%elain1图像的shear变换
+b_T_nearest = imresize(b_T,[2048,2048],'nearest');
+figure(5);
+subplot(1,3,1);
+imshow(b_T_nearest);
+title('近邻');
+b_T_bilinear = imresize(b_T,[2048,2048],'bilinear');
+subplot(1,3,2);;
+imshow(b_T_bilinear);
+title('双线性');
+b_T_bicubic = imresize(b_T,[2048,2048],'bicubic');
+subplot(1,3,3);
+imshow(b_T_bicubic);
+title('双三次插值');
+
+%elain1图像的旋转变换
+b_rotate_nearest = imresize(b_rotate,[2048,2048],'nearest');
+figure(6);
+subplot(1,3,1);
+imshow(b_rotate_nearest);
+title('近邻');
+b_rotate_bilinear = imresize(b_rotate,[2048,2048],'bilinear');
+subplot(1,3,2);
+imshow(b_rotate_bilinear);
+title('双线性');
+b_rotate_bicubic = imresize(b_rotate,[2048,2048],'bicubic');
+subplot(1,3,3);
+imshow(b_rotate_bicubic);
+title('双三次插值')
